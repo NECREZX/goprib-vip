@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoPrib</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Scripts -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+</head>
+<body>
+    <div id="app">
+        <!-- Splash Screen -->
+        <section id="splash-screen" class="screen active">
+            <div class="splash-logo">
+                <img src="goprib_logo.png" alt="GoPrib Logo" class="gojek-logo">
+            </div>
+            <div class="splash-footer">
+                <p>from</p>
+                <br>
+                <h2 class="brand-text">Layanan Cinta</h2>
+            </div>
+        </section>
+
+        <!-- Home Screen -->
+        <section id="home-screen" class="screen">
+            <header class="home-header">
+                <div class="search-bar">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" placeholder="Halo Sayangg, Mau Kemana Hari Ini?" readonly>
+                </div>
+                <div class="user-profile">
+                    <div class="avatar-circle">N</div>
+                </div>
+            </header>
+
+            <main class="home-content">
+                <div class="promo-banner">
+                    <div class="promo-text">
+                        <h3>Diskon s.d. 50%</h3>
+                        <p>Cari Jajanan enak bareng Rifqi</p>
+                    </div>
+                    <button class="promo-btn">Pesan Sekarang</button>
+                </div>
+
+                <div class="wallet-card">
+                    <div class="wallet-left">
+                        <div class="g-circle">♡</div>
+                        <div class="balance-info">
+                            <span class="amount">Unlimited</span>
+                            <span class="subs">∞</span>
+                        </div>
+                    </div>
+                    <div class="wallet-actions">
+                        <div class="action-item">
+                            <div class="action-icon blue">↑</div>
+                            <span>Bayar</span>
+                        </div>
+                        <div class="action-item">
+                            <div class="action-icon blue">+</div>
+                            <span>Top Up</span>
+                        </div>
+                        <div class="action-item">
+                            <div class="action-icon blue">••</div>
+                            <span>Lainnya</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="services-grid">
+                    <div class="service-item" onclick="selectService('goride')">
+                        <div class="badge-special">Pilih ini Sayangg</div>
+                        <div class="service-icon motor">🛵</div>
+                        <span class="service-label green-label">GoRide</span>
+                    </div>
+                    <div class="service-item" onclick="selectService('gocar')">
+                        <div class="badge-promo">-30rb</div>
+                        <div class="service-icon car">🚗</div>
+                        <span class="service-label">GoCar</span>
+                    </div>
+                    <div class="service-item" onclick="selectService('gofood')">
+                        <div class="badge-promo">-70%</div>
+                        <div class="service-icon food">🍔</div>
+                        <span class="service-label">GoFood</span>
+                    </div>
+                    <div class="service-item" onclick="selectService('gosend')">
+                        <div class="badge-promo">5RB!</div>
+                        <div class="service-icon send">📦</div>
+                        <span class="service-label">GoSend</span>
+                    </div>
+                    <div class="service-item" onclick="selectService('gomart')">
+                        <div class="service-icon mart">🛍️</div>
+                        <span class="service-label">GoMart</span>
+                    </div>
+                    <div class="service-item" onclick="selectService('pinjam')">
+                        <div class="badge-info">35JUTA</div>
+                        <div class="service-icon loan">💰</div>
+                        <span class="service-label">Pinjam</span>
+                    </div>
+                    <div class="service-item" onclick="selectService('kesehatan')">
+                        <div class="service-icon health">🩺</div>
+                        <span class="service-label">Kesehatan</span>
+                    </div>
+                    <div class="service-item" onclick="selectService('lainnya')">
+                        <div class="service-icon more">•••</div>
+                        <span class="service-label">Lainnya</span>
+                    </div>
+                </div>
+
+                <div class="quick-action-section">
+                    <h3 class="section-title">Lebih cepat buat book lagi</h3>
+                    <div class="quick-action-card" onclick="goToMap()">
+                        <div class="card-left">
+                            <div class="card-icon-circle">🛵</div>
+                            <div class="card-info">
+                                <h4>Jalan Bareng Rifqi</h4>
+                                <p>Ke mana aja asal sama ayangg cantikk</p>
+                            </div>
+                        </div>
+                        <button class="cek-btn">Cek</button>
+                        <div class="ribbon-red"> Pilih Ini Juga Bisa Sayangg</div>
+                    </div>
+                    
+                    <div class="quick-action-card">
+                        <div class="card-left">
+                            <div class="card-icon-circle">🍜</div>
+                            <div class="card-info">
+                                <h4>Makanan Favorit Nurul</h4>
+                                <p>Dimsum, Kwetiau dan Eskrim</p>
+                            </div>
+                        </div>
+                        <button class="cek-btn-gray">Cek</button>
+                    </div>
+                </div>
+
+                <div class="subscription-banner">
+                    <div class="sub-text">
+                        <h4>Langganan PLUS sekarang!</h4>
+                        <p>Klaim diskon khusus kamu →</p>
+                    </div>
+                </div>
+            </main>
+        </section>
+
+        <!-- Map Screen -->
+        <section id="map-screen" class="screen">
+            <div class="map-header-float">
+                <button class="back-btn-round" onclick="goToHome()">←</button>
+                <div class="address-box">
+                    <span class="pin-dot">📍</span>
+                    <span id="current-address">Mencari lokasi...</span>
+                </div>
+            </div>
+            
+            <div id="map"></div>
+
+            <div class="map-footer-fixed">
+                <div class="handle"></div>
+                <h3 class="footer-title">Set lokasi jemput</h3>
+                <div class="location-card">
+                    <div class="loc-badge">↑</div>
+                    <div class="loc-text">
+                        <h4 id="loc-status">Mencari lokasimu...</h4>
+                        <p>Pastikan GPS nyala ya.</p>
+                    </div>
+                    <button class="edit-btn">Edit</button>
+                </div>
+                <button class="primary-btn-green" onclick="startFinding()">Lanjut</button>
+            </div>
+        </section>
+
+        <!-- Loading Screen -->
+        <section id="loading-screen" class="screen">
+            <div class="loading-container">
+                <div class="finding-radar">
+                    <div class="radar-circle"></div>
+                    <div class="radar-center">📍</div>
+                </div>
+                <h2 id="loading-text">Mencari supir khusus buatmu...</h2>
+                <p class="loading-heart">Tunggu bentar ya sayang ❤️</p>
+            </div>
+        </section>
+
+        <!-- Driver Found Screen -->
+        <section id="result-screen" class="screen">
+            <div class="success-header">
+                <h2 class="green-title">Supir Ditemukan!</h2>
+                <p>Yay! Supir favoritmu siap meluncur.</p>
+            </div>
+            
+            <div class="driver-profile-card">
+                <div class="driver-avatar">
+                   <img src="driver_rifqi.jpeg" onerror="this.src='https://ui-avatars.com/api/?name=Rifqi&background=00AA13&color=fff&size=200'" alt="Driver">
+                </div>
+                <h2 class="driver-name-display">Rifqi</h2>
+                <div class="driver-id">
+                    <span class="star-rating">⭐ 5.0</span> • <span class="driver-tag">Driver Prioritas Nurul</span>
+                </div>
+                
+                <div class="vehicle-specs">
+                    <div class="spec-item">
+                        <span class="spec-label">PLAT NOMOR</span>
+                        <span class="spec-value">L 0 V E</span>
+                    </div>
+                    <div class="spec-item-divider"></div>
+                    <div class="spec-item">
+                        <span class="spec-label">KENDARAAN</span>
+                        <span class="spec-value">Motor Kesayangan</span>
+                    </div>
+                </div>
+
+                <div class="memo-box">
+                    <div class="memo-header">
+                        <span class="memo-icon">📝</span>
+                        <span>Pesan dari Driver:</span>
+                    </div>
+                    <p class="memo-content">"Siap-Siap ya Bocil, Dandan yang cantik ya , Rifqi otw jemput sekarang. Pake setelan pinkie ga sih wkwkwkw"</p>
+                </div>
+
+                <button class="chat-wa-btn" onclick="chatWA()">
+                    <span class="wa-icon">💬</span> Chat Supir Sekarang
+                </button>
+            </div>
+        </section>
+
+        <!-- Popup Modal -->
+        <div id="service-popup" class="modal-overlay">
+            <div class="modal-card">
+                <h3>Oops! 🤭</h3>
+                <p>Naik Motor Lebih Seru Deh Sayangg</p>
+                <button class="modal-close-btn" onclick="closePopup()">Oke Deh</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
