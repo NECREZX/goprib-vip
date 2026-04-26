@@ -127,7 +127,7 @@ function startFinding() {
 }
 
 function chatWA() {
-    const phoneNumber = "6281279164076"; 
-    const message = encodeURIComponent("Halo mas supir favoritku, jemput aku dong sekarang! ❤️");
+    const phoneNumber = "628xxx-xxx-xxx"; 
+    const message = encodeURIComponent("Halo mas supir favoritku, jemput aku dong sekarang! ");
     window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
 }
